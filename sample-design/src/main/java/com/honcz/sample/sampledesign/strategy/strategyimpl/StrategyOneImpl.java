@@ -5,6 +5,8 @@ import com.honcz.sample.sampledesign.strategy.Strategy;
 /**
  * @author honc.z
  * @date 2019/4/18
+ *
+ * 策略一
  */
 public class StrategyOneImpl extends Strategy {
     @Override

@@ -9,23 +9,27 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.honcz.sample</groupId>
-    <artifactId>sample-all</artifactId>
+    <artifactId>sample-algorithm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sample-all</name>
-    <description>练习/示例项目</description>
+    <name>sample-algorithm</name>
+    <description>算法/数据结构相关demo</description>
 
-
-    <modules>
-        <module>sample-spring</module>
-        <module>sample-algorithm</module>
-        <module>sample-design</module>
-        <module>sample-netty</module>
-    </modules>
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
