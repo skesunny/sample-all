@@ -8,6 +8,8 @@ import java.nio.channels.SocketChannel;
 /**
  * @author honc.z
  * @date 2019/4/25
+ *
+ * NIO非阻塞客户端
  */
 public class NioSampleClient {
     public static void main(String[] args){
@@ -24,18 +26,29 @@ public class NioSampleClient {
                 int i = 0;
                 String reqStr = "I'm "+i+++"-th information from client";
                 while (true){
+                    //将pos,cap,mark这三个标志初始化
                     byteBuffer.clear();
                     byteBuffer.put(reqStr.getBytes());
+                    //filp()从写模式转换到读模式，就能把buffer的当前位置更改为buffer缓冲区的第一个位置
+                    //实际上就是把position赋值给limit,代表最多读limit个数据，然后position指针置0，即从头开始读
                     byteBuffer.flip();
+                    //仍有数据
                     while (byteBuffer.hasRemaining()){
-
+                        System.out.println(byteBuffer);
+                        socketChannel.write(byteBuffer);
                     }
                 }
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (socketChannel != null){
+                try {
+                    socketChannel.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

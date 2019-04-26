@@ -22,7 +22,7 @@ import java.nio.channels.FileChannel;
  * rws：以读取、写入方式打开指定文件。相对于rw模式，还要求对文件的内容或元数据的每个更新都同步写入到底层存储设备，默认情形下(rw模式下),是使用buffer的,只有cache满的或者使用RandomAccessFile.close()关闭流的时候儿才真正的写到文件
  * rwd：与rws类似，只是仅对文件的内容同步更新到磁盘，而不修改文件的元数据
  *
- * nio举例
+ * nio读写文件举例
  */
 public class NioSample {
     public static void main(String[] args){

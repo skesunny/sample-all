@@ -9,7 +9,7 @@ import java.io.InputStream;
  * @author honc.z
  * @date 2019/4/24
  *
- * io举例
+ * io读写文件举例
  */
 public class IoSample {
     public static void main(String[] args){
