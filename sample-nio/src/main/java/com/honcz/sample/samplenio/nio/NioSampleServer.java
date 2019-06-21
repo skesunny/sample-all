@@ -34,27 +34,30 @@ public class NioSampleServer {
             serverSocketChannel.configureBlocking(false);
             //向selector中注册channel 注：channel必须处于非阻塞下，这意味着FIleChannel与Selector不能一起使用
             //SelectionKey意思是selector对什么事件感兴趣，共四种事件：Connect：连接就绪 Accept：接收就绪 Read：读就绪 Write：写就绪
-            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+            serverSocketChannel.register(selector, SelectionKey.OP_CONNECT);
 
             while (true) {
                 if (selector.select(TIMEOUT) == 0) {
                     System.out.println("==");
                     continue;
                 }
-
                 Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
                 while (iter.hasNext()) {
                     SelectionKey selectionKey = iter.next();
                     if (selectionKey.isAcceptable()) {
+                        System.out.println("接收就绪");
                         handleAccept(selectionKey);
                     }
                     if (selectionKey.isReadable()) {
+                        System.out.println("读就绪");
                         handleRead(selectionKey);
                     }
                     if (selectionKey.isWritable() && selectionKey.isValid()) {
+                        System.out.println("写就绪");
                         handleWrite(selectionKey);
                     }
                     if (selectionKey.isConnectable()) {
+                        System.out.println("连接就绪");
                         System.out.println("isConnectable = true");
                     }
                     iter.remove();
@@ -80,6 +83,7 @@ public class NioSampleServer {
         ServerSocketChannel ssChannel = (ServerSocketChannel) key.channel();
         SocketChannel sc = ssChannel.accept();
         sc.configureBlocking(false);
+        //如果已经accept，注册监听读事件
         sc.register(key.selector(), SelectionKey.OP_READ, ByteBuffer.allocateDirect(BUF_SIZE));
     }
 
