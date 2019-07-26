@@ -3,6 +3,8 @@ package com.honcz.sample.sampledesign.strategy;
 import com.honcz.sample.sampledesign.strategy.strategyimpl.StrategyOneImpl;
 import com.honcz.sample.sampledesign.strategy.strategyimpl.StrategyTwoImpl;
 
+import java.util.Date;
+
 /**
  * @author honc.z
  * @date 2019/4/18
@@ -24,10 +26,17 @@ public class HonczStrategyShadow {
         return strategy.execute(id);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IllegalAccessException, InstantiationException {
         Strategy strategyOne = new StrategyOneImpl();
         Strategy strategyTwo = new StrategyTwoImpl();
         HonczStrategyShadow shadow = new HonczStrategyShadow(strategyTwo);
         System.out.println(shadow.excute("1"));
+        long startTime = System.currentTimeMillis();
+        for (int i = 0;i<20000000;i++){
+                            Strategy strategyOne2 = StrategyTwoImpl.class.newInstance();
+//            Strategy strategy1 = new StrategyOneImpl();
+        }
+
+        System.out.println("时间为"+(System.currentTimeMillis()-startTime));
     }
 }
